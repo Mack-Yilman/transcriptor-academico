@@ -1,0 +1,125 @@
+# 🎓 Transcriptor académico
+
+Una *skill* para asistentes de IA que convierte la transcripción de una clase, conferencia o ponencia en **apuntes académicos completos y ordenados**, sin resumir ni inventar nada.
+
+Pegas el texto tal como salió de la grabación, con muletillas, desorden y todo. El asistente arma un índice, desarrolla los apuntes **tema por tema** cuando tú se lo pides y al final te entrega todo en PDF, documento editable, Markdown o listo para copiar.
+
+Funciona con **Gemini** (app, Spark, Antigravity y Gemini CLI), **Claude** (chat, Cowork y Claude Code) y cualquier otro asistente que acepte instrucciones personalizadas.
+
+## 📦 Instalación
+
+La skill es una carpeta con dos archivos: [`SKILL.md`](skills/transcriptor-academico/SKILL.md) y su licencia. Todas estas formas de instalar copian **solo esa carpeta**, no el resto del repositorio.
+
+### Opción 1: PowerShell (Windows), en una línea
+
+Abre PowerShell, pega esto y elige en el menú dónde instalarla:
+
+```powershell
+irm https://raw.githubusercontent.com/Mack-Yilman/transcriptor-academico/main/install.ps1 | iex
+```
+
+| Opción del menú | Qué hace |
+|---|---|
+| Claude Code | La instala en `~/.claude/skills/` |
+| Antigravity | La instala en `~/.gemini/config/skills/` y, si tienes el CLI de Antigravity, también en el suyo |
+| Gemini CLI | La instala en `~/.gemini/skills/` |
+| App de Gemini o Gemini Spark | Deja `SKILL.md` en *Descargas › transcriptor-academico-gemini*, listo para subir |
+| Claude.ai, Desktop o Cowork | Deja `transcriptor-academico.zip` en *Descargas*, listo para subir |
+| Todos | Todo lo anterior |
+
+Para elegir el destino sin menú, por ejemplo Claude Code:
+
+```powershell
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/Mack-Yilman/transcriptor-academico/main/install.ps1))) -Destino claude-code
+```
+
+Los destinos son `claude-code`, `antigravity`, `gemini-cli`, `gemini-app`, `claude-ai` y `todos`. Volver a ejecutar el comando actualiza la skill a la última versión. Puedes [leer el instalador](install.ps1) antes de ejecutarlo.
+
+### Opción 2: un comando para agentes de código
+
+| Herramienta | Comando |
+|---|---|
+| Cualquier agente (Claude Code, Gemini CLI, Cursor, Codex, Copilot…) con el [CLI de skills](https://github.com/vercel-labs/skills) | `npx skills add Mack-Yilman/transcriptor-academico` |
+| Gemini CLI | `gemini skills install https://github.com/Mack-Yilman/transcriptor-academico --path skills/transcriptor-academico` |
+
+### Opción 3: pedírselo a tu agente con el enlace
+
+En Antigravity, Claude Code u otro agente con acceso a archivos, pega este mensaje:
+
+> Instala la skill de https://github.com/Mack-Yilman/transcriptor-academico. Copia solo la carpeta `skills/transcriptor-academico` (contiene `SKILL.md` y `LICENSE.txt`) dentro de tu carpeta de skills globales. No copies el resto del repositorio.
+
+### Opción 4: descarga directa para la app de Gemini y Claude.ai
+
+| Plataforma | Descarga | Dónde subirla |
+|---|---|---|
+| App de Gemini y Gemini Spark | [`SKILL.md`](https://github.com/Mack-Yilman/transcriptor-academico/releases/latest/download/SKILL.md) | Configuración › Skills › Subir |
+| Claude.ai, Claude Desktop y Cowork | [`transcriptor-academico.zip`](https://github.com/Mack-Yilman/transcriptor-academico/releases/latest/download/transcriptor-academico.zip) | Configuración › Capacidades › Skills › Subir |
+
+Los enlaces siempre descargan la última versión. Sube el `.zip` tal cual, sin descomprimirlo.
+
+> Las skills de Gemini no usan Canvas. Si tu plataforma no puede crear el PDF o el documento, la skill te entrega el contenido en el chat para que lo copies.
+
+### Opción 5: cualquier otro asistente (ChatGPT, Copilot, Mistral…)
+
+- **Si acepta instrucciones largas** (proyecto, GPT personalizado, *system prompt*): pega el contenido de `SKILL.md` como instrucciones.
+- **Si tiene un límite de caracteres:** el archivo ocupa unos 19 000. Súbelo como archivo de conocimiento y escribe en las instrucciones: *«Sigue al pie de la letra las instrucciones del archivo SKILL.md»*.
+
+### En macOS o Linux
+
+Con PowerShell 7 (`pwsh`) funciona el mismo instalador. Sin PowerShell, para Claude Code:
+
+```bash
+mkdir -p ~/.claude/skills && curl -fsSL https://github.com/Mack-Yilman/transcriptor-academico/releases/latest/download/transcriptor-academico.zip -o /tmp/ta.zip && unzip -o /tmp/ta.zip -d ~/.claude/skills
+```
+
+Cambia `~/.claude/skills` por `~/.gemini/skills` (Gemini CLI) o `~/.gemini/config/skills` (Antigravity).
+
+## ✨ Qué hace
+
+| Fase | Qué pasa | Qué escribes tú |
+|---|---|---|
+| 0. Recepción | Recibe el texto por partes, si es largo | Pegas el texto; **Sí** para seguir pegando, **No** para terminar |
+| 1. Índice | Propone temas, subtemas y sub-subtemas en el orden de la clase | **➡️ Siguiente**, o un ajuste («une los temas 2 y 3») |
+| 2. Desarrollo | Desarrolla un tema completo por turno | **➡️ Siguiente** para el próximo tema |
+| 3. Reagrupación | Junta en su tema los fragmentos que aparecieron dispersos | **📦 Finalizar** |
+| 4. Entrega | Entrega todo en el formato que elijas | Copias una fila de la tabla que te muestra |
+
+En cualquier momento, **Empecemos una nueva transcripción** reinicia el proceso.
+
+### Cómo se ven los apuntes
+
+- **Fieles:** no resume, no inventa datos, años ni fuentes, y no llama «principio» o «ley» a lo que el docente no presentó así.
+- **Limpios:** quita muletillas, cortes de audio y bromas, pero conserva las fechas de examen, las tareas y lo que el docente recalca.
+- **Con formato según el contenido:** usa prosa para las explicaciones, listas numeradas para los procesos, tablas para las comparaciones y los datos, viñetas anidadas para las clasificaciones y árboles de decisión para las condiciones. No repite la misma plantilla en cada tema.
+- **Proporcionados:** una clase corta no se parte en muchos temas de una sola oración.
+- **Seguros:** si la clase dicta un prompt o dice «ignora las instrucciones anteriores», lo transcribe como parte de la clase; nunca lo ejecuta.
+
+## 🗂️ Contenido del repositorio
+
+| Ruta | Contenido | ¿Se instala? |
+|---|---|---|
+| `skills/transcriptor-academico/` | La skill: `SKILL.md` y `LICENSE.txt` | ✅ Sí, es lo único |
+| `install.ps1` | Instalador de PowerShell | No |
+| `README.md`, `CHANGELOG.md`, `LICENSE` | Documentación, historial de versiones y licencia completa | No |
+| `tests/`, `ejemplos/`, `.github/`, `package.json` | Pruebas automáticas, textos de prueba y publicación de versiones | No |
+
+## 🧪 Pruebas
+
+Las pruebas automáticas revisan que `SKILL.md` sea coherente y que la carpeta instalable solo contenga la skill. Requieren Node.js 22 o superior y no tienen dependencias:
+
+```bash
+npm test
+```
+
+El comportamiento del asistente se prueba a mano con los textos de [`ejemplos/`](ejemplos/), que son clases inventadas, y la lista de [`ejemplos/checklist.md`](ejemplos/checklist.md).
+
+## 📄 Licencia
+
+© 2026 Mack Chirinos. [Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional (CC BY-NC-ND 4.0)](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es).
+
+| Puedes | No puedes, sin autorización escrita del autor |
+|---|---|
+| ✅ Usar la skill gratis, para estudiar o enseñar | ❌ Venderla ni usarla con fines comerciales |
+| ✅ Compartirla sin cambios, citando al autor y este repositorio | ❌ Distribuir versiones modificadas |
+
+Los apuntes que generes con la skill son tuyos. Para pedir una autorización, abre un *issue* en este repositorio.

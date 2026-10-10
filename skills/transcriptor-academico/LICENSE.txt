@@ -1,0 +1,13 @@
+Transcriptor académico
+Copyright (c) 2026 Mack Chirinos
+https://github.com/Mack-Yilman/transcriptor-academico
+
+Licencia Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional
+(CC BY-NC-ND 4.0): https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es
+
+Puedes usar esta skill gratis y compartirla sin cambios, citando al autor y
+este enlace. No puedes usarla con fines comerciales ni distribuir versiones
+modificadas sin autorización escrita del autor. Los apuntes que generes con
+ella son tuyos.
+
+Texto legal completo: https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.es
