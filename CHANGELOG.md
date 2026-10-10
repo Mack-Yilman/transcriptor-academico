@@ -1,5 +1,25 @@
 # Historial de versiones
 
+## 3.2.0 — 2026-10-10
+
+### Entrega sin resúmenes
+
+- Las órdenes de la tabla final piden el contenido «copiado palabra por palabra, sin resumir». Así llega a la herramienta de archivos, que genera el archivo como una respuesta nueva.
+- La entrega tiene reglas estrictas: copiar en lugar de regenerar, y una lista de lo prohibido (resumir, convertir tablas, omitir títulos, abreviar con «…»).
+- Antes de entregar el archivo, el modelo verifica que tenga los mismos títulos, subtítulos, tablas y callouts. Si no puede incluir todo en un archivo, entrega el contenido completo en el chat.
+
+### Formato
+
+- Todo tema lleva su título y al menos un subtítulo, siempre con número y emoji, también en el archivo final.
+- Viñetas con sangría para la información jerárquica, con reglas de sangría y un ejemplo.
+- Esquemas según el caso:
+  - flechas en el texto para los flujos lineales;
+  - viñetas con sangría para las jerarquías;
+  - un esquema con `├──` en un bloque de código para las decisiones con varias ramas.
+- Indicadores ✅ ❌ ⚠️ para estados y valoraciones.
+- Fórmulas con símbolos Unicode en lugar de LaTeX, que salía crudo en el terminal y en los archivos.
+- Reglas de compatibilidad con el chat y el terminal: solo markdown básico, sin HTML; tablas de hasta 4 columnas con celdas breves; callouts de un párrafo.
+
 ## 3.1.0 — 2026-10-10
 
 ### Instalación

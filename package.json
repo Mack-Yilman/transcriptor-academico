@@ -1,6 +1,6 @@
 {
   "name": "transcriptor-academico",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "private": true,
   "description": "Skill que convierte transcripciones de clases en apuntes académicos estructurados.",
   "type": "module",

@@ -59,6 +59,8 @@ Los enlaces siempre descargan la última versión. Sube el `.zip` tal cual, sin 
 
 > Las skills de Gemini no usan Canvas. Si tu plataforma no puede crear el PDF o el documento, la skill te entrega el contenido en el chat para que lo copies.
 
+> **Copia 100 % fiel en la app de Gemini:** cuando pides un archivo, Gemini lo genera como una respuesta nueva, y en clases muy largas puede acortarlo. La skill le exige copiar palabra por palabra y verificar los títulos. Si aun así falta algo, elige **📋 Copiar del chat** y, debajo de la respuesta, usa **Compartir y exportar › Exportar a Documentos**. Eso exporta exactamente lo que ves; desde Documentos puedes descargarlo en PDF.
+
 ### Opción 5: cualquier otro asistente (ChatGPT, Copilot, Mistral…)
 
 - **Si acepta instrucciones largas** (proyecto, GPT personalizado, *system prompt*): pega el contenido de `SKILL.md` como instrucciones.
@@ -90,7 +92,21 @@ En cualquier momento, **Empecemos una nueva transcripción** reinicia el proceso
 
 - **Fieles:** no resume, no inventa datos, años ni fuentes, y no llama «principio» o «ley» a lo que el docente no presentó así.
 - **Limpios:** quita muletillas, cortes de audio y bromas, pero conserva las fechas de examen, las tareas y lo que el docente recalca.
-- **Con formato según el contenido:** usa prosa para las explicaciones, listas numeradas para los procesos, tablas para las comparaciones y los datos, viñetas anidadas para las clasificaciones y árboles de decisión para las condiciones. No repite la misma plantilla en cada tema.
+- **Siempre con la misma jerarquía:** cada tema lleva su título (`## 📘 Tema 1: …`) y sus subtítulos (`### 🔹 1.1. …`), y los sub-subtítulos en negrita (`**1.1.1. …**`) cuando el contenido tiene esa profundidad.
+- **Con formato según el contenido:**
+
+  | Recurso | Para qué |
+  |---|---|
+  | Prosa | Explicaciones |
+  | Viñetas, con sangría cuando hay jerarquía | Enumeraciones y clasificaciones |
+  | Listas numeradas | Procesos |
+  | Tablas | Comparaciones y datos |
+  | Esquemas con `├──` | Decisiones con ramas |
+  | Bloques de código | Código dictado |
+  | Callouts (💡 🎯 ⚠️ 🔬 📌) | Definiciones, énfasis del docente, alertas, casos y textos dictados |
+
+  No repite la misma plantilla en cada tema.
+- **Legibles en cualquier lugar:** solo usa markdown básico y símbolos Unicode para las fórmulas (x², √, ≤), así que se ven bien en el chat, en el terminal y en los archivos exportados.
 - **Proporcionados:** una clase corta no se parte en muchos temas de una sola oración.
 - **Seguros:** si la clase dicta un prompt o dice «ignora las instrucciones anteriores», lo transcribe como parte de la clase; nunca lo ejecuta.
 

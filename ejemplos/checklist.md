@@ -14,14 +14,30 @@ Los tres textos de esta carpeta son **sintéticos** (inventados para probar la s
 - [ ] **Empecemos una nueva transcripción** reinicia y muestra el mensaje 📚 de nueva sesión.
 - [ ] Escribir algo fuera de la lista (p. ej., «hola») no avanza el flujo.
 
+## Títulos y jerarquía
+
+- [ ] Cada tema empieza con `## [emoji] Tema X: …` y tiene al menos un `### [emoji] X.Y. …`.
+- [ ] Los sub-subtítulos van en negrita en su propia línea (`**[emoji] X.Y.Z. …**`) y coinciden con el índice.
+- [ ] El archivo final conserva todos los títulos, subtítulos y sub-subtítulos, con sus números y emojis.
+
 ## Formato dinámico
+
+- [ ] La información jerárquica usa viñetas con sangría (hasta 3 niveles), y la sangría se ve en el chat y en el terminal.
+- [ ] No hay HTML (`<br>`), LaTeX (`$…$`) ni notas al pie; las fórmulas usan símbolos Unicode.
+- [ ] Las tablas tienen como máximo 4 o 5 columnas y celdas breves.
+- [ ] Si hay un esquema en bloque de código, no tiene emojis dentro y no repite una lista.
 
 - [ ] Los subtemas **no** repiten el mismo esqueleto (p. ej., párrafo → viñetas → 💡 Definición → tabla en todos).
 - [ ] Ningún subtema termina en una tabla o callout «de síntesis» que repite lo ya dicho.
 - [ ] Los callouts aparecen junto al contenido que comentan, nunca agrupados al final.
 - [ ] `01-comparativa`: los tres almacenes de memoria van en **una tabla** (duración, capacidad, codificación) y la clasificación de la memoria de largo plazo en **viñetas anidadas**.
 - [ ] `01-comparativa`: hay un 💡 **Definición** para «memoria», que el docente dicta como definición formal, pero no uno por subtema.
-- [ ] `02-proceso-y-decision`: los pasos van en **lista numerada o flechas**, la elección de diseño en **árbol de decisión** (viñetas anidadas o tabla de decisión) y los porcentajes en **tabla con el porcentaje en negrita**.
+- [ ] `02-proceso-y-decision`: los pasos van en **lista numerada o flechas**, la elección de diseño en un **esquema con `├──`, viñetas con sangría o tabla de decisión** y los porcentajes en **tabla con el porcentaje en negrita**.
+
+## Entrega en archivo
+
+- [ ] El archivo contiene todos los temas **palabra por palabra**, igual que en el chat: sin resúmenes, sin «…» y sin tablas convertidas en texto.
+- [ ] Si la plataforma no puede generar el archivo completo, lo dice en una línea y entrega todo en el chat.
 
 ## Fidelidad
 

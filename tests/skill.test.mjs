@@ -58,10 +58,19 @@ test('el cuerpo no usa título de nivel 1, nivel 4 ni divisores', () => {
   }
 });
 
-test('el único bloque de código es el del índice', () => {
+test('solo hay dos bloques de código: el índice y el ejemplo de esquema', () => {
   const vallas = cuerpo.split('\n').filter((l) => l.startsWith('```'));
-  assert.equal(vallas.length, 2, 'debe haber exactamente un bloque de código');
-  assert.ok(seccion('### Fase 1', '### Fase 2').includes('```text'), 'el bloque debe estar en la Fase 1');
+  assert.equal(vallas.length, 4, 'debe haber exactamente dos bloques de código');
+  assert.ok(seccion('### Fase 1', '### Fase 2').includes('```text'), 'el índice va en la Fase 1');
+  const esquema = seccion('### Esquemas', '### Compatibilidad');
+  assert.ok(esquema.includes('```\n') && esquema.includes('├──'), 'el ejemplo de esquema usa ├── en un bloque sin lenguaje');
+});
+
+test('las órdenes de entrega piden copiar palabra por palabra', () => {
+  // Gemini genera el archivo como una respuesta nueva: la orden que pega el usuario debe exigir la copia literal.
+  const filas = seccion('### Fase 3', '### Fase 4').split('\n').filter((l) => /^\| (📄|📝|📃|📋)/.test(l));
+  assert.equal(filas.length, 4);
+  for (const fila of filas) assert.match(fila, /palabra por palabra/, fila);
 });
 
 test('cada mensaje literal del flujo aparece idéntico en el recordatorio final', () => {
