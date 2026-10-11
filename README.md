@@ -4,7 +4,7 @@ Una *skill* para asistentes de IA que convierte la transcripción de una clase, 
 
 Pegas el texto tal como salió de la grabación, con muletillas, desorden y todo. El asistente arma un índice, desarrolla los apuntes **tema por tema** cuando tú se lo pides y al final te entrega todo en PDF, documento editable, Markdown o listo para copiar.
 
-Funciona con **Gemini** (app, Spark, Antigravity y Gemini CLI), **Claude** (chat, Cowork y Claude Code) y cualquier otro asistente que acepte instrucciones personalizadas.
+Funciona con **Gemini** (app, Spark y Antigravity), **Claude** (chat, Cowork y Claude Code) y cualquier otro asistente que acepte instrucciones personalizadas.
 
 ## 📦 Instalación
 
@@ -22,7 +22,6 @@ irm https://raw.githubusercontent.com/Mack-Yilman/transcriptor-academico/main/in
 |---|---|
 | Claude Code | La instala en `~/.claude/skills/` |
 | Antigravity | La instala en `~/.gemini/config/skills/` y, si tienes el CLI de Antigravity, también en el suyo |
-| Gemini CLI | La instala en `~/.gemini/skills/` |
 | App de Gemini o Gemini Spark | Deja `SKILL.md` en *Descargas › transcriptor-academico-gemini*, listo para subir |
 | Claude.ai, Desktop o Cowork | Deja `transcriptor-academico.zip` en *Descargas*, listo para subir |
 | Todos | Todo lo anterior |
@@ -33,14 +32,13 @@ Para elegir el destino sin menú, por ejemplo Claude Code:
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/Mack-Yilman/transcriptor-academico/main/install.ps1))) -Destino claude-code
 ```
 
-Los destinos son `claude-code`, `antigravity`, `gemini-cli`, `gemini-app`, `claude-ai` y `todos`. Volver a ejecutar el comando actualiza la skill a la última versión. Puedes [leer el instalador](install.ps1) antes de ejecutarlo.
+Los destinos son `claude-code`, `antigravity`, `gemini-app`, `claude-ai` y `todos`. Volver a ejecutar el comando actualiza la skill a la última versión. Puedes [leer el instalador](install.ps1) antes de ejecutarlo.
 
 ### Opción 2: un comando para agentes de código
 
 | Herramienta | Comando |
 |---|---|
-| Cualquier agente (Claude Code, Gemini CLI, Cursor, Codex, Copilot…) con el [CLI de skills](https://github.com/vercel-labs/skills) | `npx skills add Mack-Yilman/transcriptor-academico` |
-| Gemini CLI | `gemini skills install https://github.com/Mack-Yilman/transcriptor-academico --path skills/transcriptor-academico` |
+| Cualquier agente (Claude Code, Antigravity, Cursor, Codex, Copilot…) con el [CLI de skills](https://github.com/vercel-labs/skills) | `npx skills add Mack-Yilman/transcriptor-academico` |
 
 ### Opción 3: pedírselo a tu agente con el enlace
 
@@ -74,7 +72,7 @@ Con PowerShell 7 (`pwsh`) funciona el mismo instalador. Sin PowerShell, para Cla
 mkdir -p ~/.claude/skills && curl -fsSL https://github.com/Mack-Yilman/transcriptor-academico/releases/latest/download/transcriptor-academico.zip -o /tmp/ta.zip && unzip -o /tmp/ta.zip -d ~/.claude/skills
 ```
 
-Cambia `~/.claude/skills` por `~/.gemini/skills` (Gemini CLI) o `~/.gemini/config/skills` (Antigravity).
+Cambia `~/.claude/skills` por `~/.gemini/config/skills` (Antigravity).
 
 ## ✨ Qué hace
 

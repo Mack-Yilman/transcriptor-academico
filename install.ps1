@@ -4,7 +4,7 @@
 #   Con menu:  irm https://raw.githubusercontent.com/Mack-Yilman/transcriptor-academico/main/install.ps1 | iex
 #   Sin menu:  & ([scriptblock]::Create((irm https://raw.githubusercontent.com/Mack-Yilman/transcriptor-academico/main/install.ps1))) -Destino claude-code
 #
-# Destinos: claude-code, antigravity, gemini-cli, gemini-app, claude-ai, todos.
+# Destinos: claude-code, antigravity, gemini-app, claude-ai, todos.
 # El archivo es solo ASCII a proposito: los textos con tilde usan \uXXXX (funcion T), asi funciona
 # igual en Windows PowerShell 5.1 y PowerShell 7 sin depender de la codificacion. Nunca pases una
 # ruta por T: Regex.Unescape fallaria con "\U" de C:\Users.
@@ -90,10 +90,6 @@ param([string]$Destino)
                     Copy-Skill $skill (Ruta '.gemini', 'antigravity-cli', 'skills') 'Antigravity CLI'
                 }
             }
-            'gemini-cli' {
-                Copy-Skill $skill (Ruta '.gemini', 'skills') 'Gemini CLI'
-                Write-Host (T '       En Gemini CLI, /skills reload la carga sin reiniciar.')
-            }
             'gemini-app' {
                 # Carpeta propia en Descargas: solo se sobrescriben estos dos archivos, nunca se borra nada.
                 $carpeta = Join-Path (Get-Descargas) "$nombre-gemini"
@@ -104,7 +100,10 @@ param([string]$Destino)
                 if ($env:OS -eq 'Windows_NT') { Invoke-Item $carpeta }
             }
             'claude-ai' {
-                $zip = Join-Path (Get-Descargas) "$nombre.zip"
+                # La carpeta de Descargas puede no existir (perfil nuevo).
+                $descargas = Get-Descargas
+                New-Item -ItemType Directory -Path $descargas -Force | Out-Null
+                $zip = Join-Path $descargas "$nombre.zip"
                 Copy-Item -Path $skill.Zip -Destination $zip -Force
                 Write-Hecho 'Claude.ai, Desktop y Cowork' $zip
                 Write-Host (T '       S\u00fabelo en Claude: Configuraci\u00f3n > Capacidades > Skills > Subir.')
@@ -115,10 +114,9 @@ param([string]$Destino)
     $opciones = [ordered]@{
         '1' = 'claude-code'
         '2' = 'antigravity'
-        '3' = 'gemini-cli'
-        '4' = 'gemini-app'
-        '5' = 'claude-ai'
-        '6' = 'todos'
+        '3' = 'gemini-app'
+        '4' = 'claude-ai'
+        '5' = 'todos'
     }
 
     Write-Host ''
@@ -132,10 +130,9 @@ param([string]$Destino)
         Write-Host (T '\u00bfD\u00f3nde quieres instalar la skill?')
         Write-Host '  1) Claude Code'
         Write-Host '  2) Antigravity'
-        Write-Host '  3) Gemini CLI'
-        Write-Host (T '  4) App de Gemini o Gemini Spark (deja SKILL.md en Descargas para subirlo)')
-        Write-Host (T '  5) Claude.ai, Claude Desktop o Cowork (deja el .zip en Descargas para subirlo)')
-        Write-Host '  6) Todos'
+        Write-Host (T '  3) App de Gemini o Gemini Spark (deja SKILL.md en Descargas para subirlo)')
+        Write-Host (T '  4) Claude.ai, Claude Desktop o Cowork (deja el .zip en Descargas para subirlo)')
+        Write-Host '  5) Todos'
         $eleccion = "$(Read-Host (T 'Escribe un n\u00famero'))".Trim()
         if (-not $opciones.Contains($eleccion)) { throw ((T 'Opci\u00f3n no v\u00e1lida: ') + $eleccion) }
         $Destino = $opciones[$eleccion]
@@ -144,7 +141,7 @@ param([string]$Destino)
     $skill = Get-Skill
     try {
         if ($Destino -eq 'todos') {
-            foreach ($opcion in 'claude-code', 'antigravity', 'gemini-cli', 'gemini-app', 'claude-ai') { Install-Destino $skill $opcion }
+            foreach ($opcion in 'claude-code', 'antigravity', 'gemini-app', 'claude-ai') { Install-Destino $skill $opcion }
         } else {
             Install-Destino $skill $Destino
         }
