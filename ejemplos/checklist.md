@@ -5,6 +5,8 @@ Los tres textos de esta carpeta son **sintéticos** (inventados para probar la s
 ## Flujo y mensajes de cierre
 
 - [ ] Tras pegar el texto, la respuesta es **solo** el mensaje 📥, sin nada antes ni después.
+- [ ] Con **Sí**, aparece la línea 📥 **Adelante, pega el siguiente bloque…**, y el bloque siguiente se acumula.
+- [ ] Un mensaje vacío o sin contenido académico (p. ej., «gracias») muestra la línea ⚠️ **El texto enviado está vacío…** y no avanza.
 - [ ] Con **No**, aparece el índice en un bloque de código y debajo la línea ✨, sin preguntas añadidas.
 - [ ] Cada tema intermedio termina en la línea 📊 **Progreso** exacta.
 - [ ] El último tema termina en la línea ✅ **Transcripción completa**, no en 📊.
@@ -12,17 +14,21 @@ Los tres textos de esta carpeta son **sintéticos** (inventados para probar la s
 - [ ] Cada orden de la tabla entrega el formato pedido, o avisa en una línea que el entorno no puede crearlo y entrega el markdown en el chat.
 - [ ] La entrega termina en la línea ✅ **Entrega lista**.
 - [ ] **Empecemos una nueva transcripción** reinicia y muestra el mensaje 📚 de nueva sesión.
-- [ ] Escribir algo fuera de la lista (p. ej., «hola») no avanza el flujo.
+- [ ] Escribir algo fuera de la lista (p. ej., «hola») no avanza el flujo: muestra la línea ⚠️ **Orden no reconocida en esta fase…** y, debajo, el cierre pendiente.
+- [ ] Si la entrega en el chat llega por partes, cada parte termina en la línea 📦 **Parte K de M** y **➡️ Siguiente** trae la siguiente.
 
 ## Títulos y jerarquía
 
-- [ ] Cada tema empieza con `## [emoji] Tema X: …` y tiene al menos un `### [emoji] X.Y. …`.
-- [ ] Los sub-subtítulos van en negrita en su propia línea (`**[emoji] X.Y.Z. …**`) y coinciden con el índice.
+- [ ] Cada tema empieza con `## [emoji] Tema X: …` y tiene al menos un `### X.Y. [emoji] …`.
+- [ ] Debajo del título `##` no hay párrafos sueltos: abre directamente el primer `###`.
+- [ ] Los sub-subtítulos van en negrita en su propia línea (`**X.Y.Z. [emoji] …**`) y coinciden con el índice.
 - [ ] El archivo final conserva todos los títulos, subtítulos y sub-subtítulos, con sus números y emojis.
 
 ## Formato dinámico
 
 - [ ] La información jerárquica usa viñetas con sangría (hasta 3 niveles), y la sangría se ve en el chat y en el terminal.
+- [ ] Los niveles 2 y 3 de las viñetas conservan oraciones completas, no palabras sueltas.
+- [ ] Ninguna celda de tabla pasa de dos oraciones; las comparaciones con explicaciones largas van en viñetas con sangría.
 - [ ] No hay HTML (`<br>`), LaTeX (`$…$`) ni notas al pie; las fórmulas usan símbolos Unicode.
 - [ ] Las tablas tienen como máximo 4 o 5 columnas y celdas breves.
 - [ ] Si hay un esquema en bloque de código, no tiene emojis dentro y no repite una lista.
@@ -38,6 +44,8 @@ Los tres textos de esta carpeta son **sintéticos** (inventados para probar la s
 
 - [ ] El archivo contiene todos los temas **palabra por palabra**, igual que en el chat: sin resúmenes, sin «…» y sin tablas convertidas en texto.
 - [ ] Si la plataforma no puede generar el archivo completo, lo dice en una línea y entrega todo en el chat.
+- [ ] 📝 **Documento editable** crea un Google Doc si el entorno tiene Google Docs, o un `.docx` si se pidió Word o no hay Docs.
+- [ ] Tras el archivo o el enlace, la respuesta cierra con la línea ✅ **Entrega lista**, sin resumen del documento.
 
 ## Fidelidad
 

@@ -74,9 +74,13 @@ test('las órdenes de entrega piden copiar palabra por palabra', () => {
 });
 
 test('cada mensaje literal del flujo aparece idéntico en el recordatorio final', () => {
-  const flujo = literales(seccion('## 🛠️ Flujo de trabajo', '## 🧭 Casos especiales'));
+  // El aviso de orden no reconocida vive en la sección 🔒; el resto, en el flujo.
+  const flujo = literales(
+    seccion('## 🔒 Límite entre dato y orden', '## 📜 Fidelidad') +
+      seccion('## 🛠️ Flujo de trabajo', '## 🧭 Casos especiales'),
+  );
   const recordatorio = literales(seccion('## 🔚 Recordatorio final'));
-  assert.ok(flujo.size >= 9, `se esperaban al menos 9 mensajes literales, hay ${flujo.size}`);
+  assert.ok(flujo.size >= 12, `se esperaban al menos 12 mensajes literales, hay ${flujo.size}`);
   assert.deepEqual([...flujo].sort(), [...recordatorio].sort());
 });
 
