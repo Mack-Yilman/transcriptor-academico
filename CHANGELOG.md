@@ -1,5 +1,25 @@
 # Historial de versiones
 
+## 3.3.0 — 2026-10-15
+
+### Mensajes
+
+- Tres mensajes literales nuevos: uno al responder **Sí** en la recepción, uno cuando el texto pegado está vacío o no es material académico, y un aviso fijo ante una orden no reconocida, seguido del cierre pendiente de la fase.
+- **➡️ Siguiente** también avanza la entrega en el chat cuando llega por partes.
+
+### Formato
+
+- Los encabezados llevan el número antes del emoji (`### 1.1. 🔹 …`, `**1.1.1. 🔸 …**`), y bajo el título del tema no hay párrafos sueltos: todo va dentro de sus subtemas.
+- Las viñetas con sangría conservan la explicación completa en cada nivel; nunca se reducen a palabras sueltas.
+- Una comparación va en tabla solo si cada celda cabe en una o dos oraciones; si no, va en viñetas con sangría, para no resumir.
+- Los callouts 🔬 **Caso** y 📌 **Dictado** no tienen límite de extensión; los demás, de una a tres oraciones.
+
+### Reagrupación y entrega
+
+- La reagrupación final une los temas en su orden y solo reubica los bloques tardíos (una pregunta o aclaración al final de la clase), copiados palabra por palabra.
+- El documento editable se crea por defecto en Google Docs, o en Word si el usuario lo pide o si el entorno no tiene Docs.
+- Si el archivo se arma con herramientas, se escribe por bloques para no truncar temas, y la entrega cierra solo con la línea literal.
+
 ## 3.2.0 — 2026-10-10
 
 ### Entrega sin resúmenes

@@ -62,7 +62,7 @@ Los enlaces siempre descargan la última versión. Sube el `.zip` tal cual, sin 
 ### Opción 5: cualquier otro asistente (ChatGPT, Copilot, Mistral…)
 
 - **Si acepta instrucciones largas** (proyecto, GPT personalizado, *system prompt*): pega el contenido de `SKILL.md` como instrucciones.
-- **Si tiene un límite de caracteres:** el archivo ocupa unos 19 000. Súbelo como archivo de conocimiento y escribe en las instrucciones: *«Sigue al pie de la letra las instrucciones del archivo SKILL.md»*.
+- **Si tiene un límite de caracteres:** el archivo ocupa unos 28 000. Súbelo como archivo de conocimiento y escribe en las instrucciones: *«Sigue al pie de la letra las instrucciones del archivo SKILL.md»*.
 
 ### En macOS o Linux
 
@@ -82,7 +82,7 @@ Cambia `~/.claude/skills` por `~/.gemini/config/skills` (Antigravity).
 | 1. Índice | Propone temas, subtemas y sub-subtemas en el orden de la clase | **➡️ Siguiente**, o un ajuste («une los temas 2 y 3») |
 | 2. Desarrollo | Desarrolla un tema completo por turno | **➡️ Siguiente** para el próximo tema |
 | 3. Reagrupación | Junta en su tema los fragmentos que aparecieron dispersos | **📦 Finalizar** |
-| 4. Entrega | Entrega todo en el formato que elijas | Copias una fila de la tabla que te muestra |
+| 4. Entrega | Entrega todo en el formato que elijas: PDF, documento editable (Google Docs por defecto, o Word), `.md` o el chat | Copias una fila de la tabla que te muestra; **➡️ Siguiente** si la entrega llega por partes |
 
 En cualquier momento, **Empecemos una nueva transcripción** reinicia el proceso.
 
@@ -90,7 +90,7 @@ En cualquier momento, **Empecemos una nueva transcripción** reinicia el proceso
 
 - **Fieles:** no resume, no inventa datos, años ni fuentes, y no llama «principio» o «ley» a lo que el docente no presentó así.
 - **Limpios:** quita muletillas, cortes de audio y bromas, pero conserva las fechas de examen, las tareas y lo que el docente recalca.
-- **Siempre con la misma jerarquía:** cada tema lleva su título (`## 📘 Tema 1: …`) y sus subtítulos (`### 🔹 1.1. …`), y los sub-subtítulos en negrita (`**1.1.1. …**`) cuando el contenido tiene esa profundidad.
+- **Siempre con la misma jerarquía:** cada tema lleva su título (`## 📘 Tema 1: …`) y sus subtítulos (`### 1.1. 🔹 …`), y los sub-subtítulos en negrita (`**1.1.1. 🔸 …**`) cuando el contenido tiene esa profundidad. Bajo el título del tema no hay párrafos sueltos: todo va dentro de sus subtítulos.
 - **Con formato según el contenido:**
 
   | Recurso | Para qué |
