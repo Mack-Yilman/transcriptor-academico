@@ -66,13 +66,6 @@ test('solo hay dos bloques de código: el índice y el ejemplo de esquema', () =
   assert.ok(esquema.includes('```\n') && esquema.includes('├──'), 'el ejemplo de esquema usa ├── en un bloque sin lenguaje');
 });
 
-test('las órdenes de entrega piden copiar palabra por palabra', () => {
-  // Gemini genera el archivo como una respuesta nueva: la orden que pega el usuario debe exigir la copia literal.
-  const filas = seccion('### Fase 3', '### Fase 4').split('\n').filter((l) => /^\| (📄|📝|📃|📋)/.test(l));
-  assert.equal(filas.length, 4);
-  for (const fila of filas) assert.match(fila, /palabra por palabra/, fila);
-});
-
 test('cada mensaje literal del flujo aparece idéntico en el recordatorio final', () => {
   // El aviso de orden no reconocida vive en la sección 🔒; el resto, en el flujo.
   const flujo = literales(
@@ -80,7 +73,7 @@ test('cada mensaje literal del flujo aparece idéntico en el recordatorio final'
       seccion('## 🛠️ Flujo de trabajo', '## 🧭 Casos especiales'),
   );
   const recordatorio = literales(seccion('## 🔚 Recordatorio final'));
-  assert.ok(flujo.size >= 12, `se esperaban al menos 12 mensajes literales, hay ${flujo.size}`);
+  assert.ok(flujo.size >= 8, `se esperaban al menos 8 mensajes literales, hay ${flujo.size}`);
   assert.deepEqual([...flujo].sort(), [...recordatorio].sort());
 });
 
@@ -94,13 +87,17 @@ test('ninguna regla cita un mensaje literal recortado', () => {
   }
 });
 
-test('la tabla de la Fase 3 tiene las filas que anuncia el prompt', () => {
-  const fase3 = seccion('### Fase 3', '### Fase 4');
-  const filas = fase3.split('\n').filter((l) => l.startsWith('| ') && !l.startsWith('| Opción'));
-  const anunciadas = [...cuerpo.matchAll(/tabla (?:completa )?de (\d+) filas/g)].map((m) => Number(m[1]));
-  assert.ok(anunciadas.length > 0, 'el prompt debe anunciar el número de filas');
-  for (const n of anunciadas) assert.equal(n, filas.length);
-  assert.match(filas.at(-1), /Empecemos una nueva transcripción\./, 'la última fila es la de reinicio');
+test('sin exportación: no quedan las Fases 3 y 4 ni sus mensajes de entrega', () => {
+  // v4.0.0: la entrega en archivo solo funcionaba en algunos LLM. El contenido queda en el chat.
+  assert.doesNotMatch(cuerpo, /### Fase [34]/);
+  assert.doesNotMatch(cuerpo, /📦 Finalizar|Entrega lista|Parte \*\*K\*\*|Sin archivo/);
+});
+
+test('el último tema remite al reinicio, que también acepta Finalizar', () => {
+  const ultimo = [...literales(seccion('## 🛠️ Flujo de trabajo', '## 🧭 Casos especiales'))].find((l) => l.startsWith('✅'));
+  assert.ok(ultimo, 'falta el literal ✅ del último tema');
+  assert.match(ultimo, /Empecemos una nueva transcripción/);
+  assert.match(seccion('## 🔒 Límite entre dato y orden', '## 📜 Fidelidad'), /Tras el último tema.*Finalizar.*reiniciar/);
 });
 
 test('es portable: no nombra plataformas ni herramientas propias de una', () => {
