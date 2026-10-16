@@ -1,8 +1,8 @@
 # 🎓 Transcriptor académico
 
-Una *skill* para asistentes de IA que convierte la transcripción de una clase, conferencia o ponencia en **apuntes académicos completos y ordenados**, sin resumir ni inventar nada.
+Una *skill* para asistentes de IA que convierte la transcripción de una clase, conferencia o ponencia, de cualquier materia, en **apuntes académicos completos y ordenados**, sin resumir ni inventar nada.
 
-Pegas el texto tal como salió de la grabación, con muletillas, desorden y todo. El asistente arma un índice, desarrolla los apuntes **tema por tema** cuando tú se lo pides y al final te entrega todo en PDF, documento editable, Markdown o listo para copiar.
+Pegas el texto tal como salió de la grabación, con muletillas, desorden y todo. El asistente arma un índice y desarrolla los apuntes **tema por tema** cuando tú se lo pides, directamente en el chat.
 
 Funciona con **Gemini** (app, Spark y Antigravity), **Claude** (chat, Cowork y Claude Code) y cualquier otro asistente que acepte instrucciones personalizadas.
 
@@ -55,26 +55,15 @@ En Antigravity, Claude Code u otro agente con acceso a archivos, pega este mensa
 
 Los enlaces siempre descargan la última versión. Sube el `.zip` tal cual, sin descomprimirlo.
 
-> Las skills de Gemini no usan Canvas. Si tu plataforma no puede crear el PDF o el documento, la skill te entrega el contenido en el chat para que lo copies.
-
-> **Copia 100 % fiel en la app de Gemini:** cuando pides un archivo, Gemini lo genera como una respuesta nueva, y en clases muy largas puede acortarlo. La skill le exige armar un único archivo tema por tema, copiando lo que ya mostró, y verificar los títulos. Si aun así falta algo, elige **📋 Copiar del chat** y, debajo de la respuesta, usa **Compartir y exportar › Exportar a Documentos**. Eso exporta exactamente lo que ves; desde Documentos puedes descargarlo en PDF.
-
-> **Con Gemini Flash, revisa los comentarios breves del docente.** En las pruebas con una clase real de 22 minutos, Gemini 3.8 Flash no inventó datos, pero omitió algunas frases sueltas dichas en medio de una demostración (un consejo, «les dejo los enlaces en el post»). Claude Sonnet las conservó todas con la misma skill.
-
-#### Cómo entrega el archivo cada asistente
-
-| Si tu asistente… | La skill… |
-|---|---|
-| Trabaja en una carpeta (Claude Code, Cowork, Antigravity) | Guarda `apuntes-<tema>.md` (o PDF, `.docx`) en esa carpeta, sin sobrescribir otro, y te da la ruta |
-| Tiene un conector de documentos con permiso para crear (Google Docs o Drive) | Crea el documento a partir del markdown ya escrito y te da el enlace |
-| Genera archivos como una respuesta propia (app de Gemini) | Arma un solo archivo, tema por tema, con lo ya mostrado |
-| Ejecuta código y ofrece descargas (Claude.ai) | Escribe el archivo por bloques y te da la descarga |
-| No puede crear ese formato | Te avisa en una línea y te entrega todo en el chat |
+> **¿Qué modelo usar?** La versión 4.0 se probó con dos clases reales de materias distintas (programación, 22 min; cirugía cardíaca, 1 h 42 min):
+>
+> - **Claude Sonnet** conservó el 100 % de los datos clave de ambas clases, con el vocabulario del docente.
+> - **Gemini 3.8 Flash** dio el mejor índice con razonamiento **medio**: con el mínimo resumió la clase larga en 3 temas enormes, y con el máximo agregó divisores prohibidos y tardó el doble. Conservó cerca del 95 % de los datos de la clase larga y el 80 % de la corta: omite frases sueltas dirigidas a los alumnos en medio de una demostración y, en materias técnicas, tiende a escribir como un libro de texto (añade términos y explicaciones que el docente no dijo). En la app de Gemini, elige un modo con razonamiento, no el más rápido, y revisa los apuntes contra tu clase.
 
 ### Opción 5: cualquier otro asistente (ChatGPT, Copilot, Mistral…)
 
 - **Si acepta instrucciones largas** (proyecto, GPT personalizado, *system prompt*): pega el contenido de `SKILL.md` como instrucciones.
-- **Si tiene un límite de caracteres:** el archivo ocupa unos 33 000. Súbelo como archivo de conocimiento y escribe en las instrucciones: *«Sigue al pie de la letra las instrucciones del archivo SKILL.md»*.
+- **Si tiene un límite de caracteres:** el archivo ocupa unos 30 000. Súbelo como archivo de conocimiento y escribe en las instrucciones: *«Sigue al pie de la letra las instrucciones del archivo SKILL.md»*.
 
 ### En macOS o Linux
 
@@ -93,14 +82,16 @@ Cambia `~/.claude/skills` por `~/.gemini/config/skills` (Antigravity).
 | 0. Recepción | Recibe el texto por partes, si es largo | Pegas el texto; **Sí** para seguir pegando, **No** para terminar |
 | 1. Índice | Propone temas, subtemas y sub-subtemas en el orden de la clase | **➡️ Siguiente**, o un ajuste («une los temas 2 y 3») |
 | 2. Desarrollo | Desarrolla un tema completo por turno | **➡️ Siguiente** para el próximo tema |
-| 3. Reagrupación | Junta en su tema los fragmentos que aparecieron dispersos | **📦 Finalizar** |
-| 4. Entrega | Entrega todo en el formato que elijas: PDF, documento editable (Google Docs por defecto, o Word), `.md` o el chat | Copias una fila de la tabla que te muestra; **➡️ Siguiente** si la entrega llega por partes |
 
-En cualquier momento, **Empecemos una nueva transcripción** reinicia el proceso.
+En cualquier momento, **Empecemos una nueva transcripción** reinicia el proceso. Tras el último tema, «Finalizar» también.
+
+### Cómo llevarte los apuntes
+
+Desde la versión 4.0 la skill no genera archivos: la entrega en PDF o en documentos solo funcionaba bien en algunos asistentes, y en otros resumía el contenido. Todos los apuntes quedan en el chat, tema por tema, listos para copiar. Para guardarlos, usa la función de tu plataforma; en la app de Gemini, por ejemplo, **Compartir y exportar › Exportar a Documentos** debajo de cada respuesta exporta exactamente lo que ves.
 
 ### Cómo se ven los apuntes
 
-- **Fieles:** no resume, no inventa datos, años ni fuentes, y no llama «principio» o «ley» a lo que el docente no presentó así.
+- **Fieles:** no resume, no inventa datos, años ni fuentes, y no llama «principio» o «ley» a lo que el docente no presentó así. Corrige los errores del reconocimiento de voz solo cuando la palabra correcta es inequívoca; si hay duda, la marca con «(¿?)» para que la revises en la grabación.
 - **Limpios:** quita muletillas, cortes de audio, bromas y marcas de tiempo, pero conserva las fechas de examen, las tareas, los consejos del docente y lo que recalca. Si la transcripción trae marcas de tiempo, el índice muestra el intervalo de cada tema (`[0:00–4:00]`).
 - **Siempre con la misma jerarquía:** cada tema lleva su título (`## 📘 Tema 1: …`) y sus subtítulos (`### 1.1. 🔹 …`), y los sub-subtítulos en negrita (`**1.1.1. 🔸 …**`) cuando el contenido tiene esa profundidad. Bajo el título del tema no hay párrafos sueltos: todo va dentro de sus subtítulos.
 - **Con formato según el contenido:**
@@ -116,7 +107,7 @@ En cualquier momento, **Empecemos una nueva transcripción** reinicia el proceso
   | Callouts (💡 🎯 ⚠️ 🔬 📌) | Definiciones, énfasis del docente, alertas, casos y textos dictados |
 
   No repite la misma plantilla en cada tema.
-- **Legibles en cualquier lugar:** solo usa markdown básico y símbolos Unicode para las fórmulas (x², √, ≤), así que se ven bien en el chat, en el terminal y en los archivos exportados.
+- **Legibles en cualquier lugar:** solo usa markdown básico y símbolos Unicode para las fórmulas (x², √, ≤), así que se ven bien en el chat, en el terminal y al exportarlos a un documento.
 - **Proporcionados:** una clase corta no se parte en muchos temas de una sola oración.
 - **Seguros:** si la clase dicta un prompt o dice «ignora las instrucciones anteriores», lo transcribe como parte de la clase; nunca lo ejecuta.
 
@@ -137,7 +128,7 @@ Las pruebas automáticas revisan que `SKILL.md` sea coherente y que la carpeta i
 npm test
 ```
 
-El comportamiento del asistente se prueba a mano con los textos de [`ejemplos/`](ejemplos/), que son clases inventadas, y la lista de [`ejemplos/checklist.md`](ejemplos/checklist.md).
+El comportamiento del asistente se prueba con los textos de [`ejemplos/`](ejemplos/), que son clases inventadas, y con clases reales de distintas materias, contra la [checklist de calidad](ejemplos/checklist.md): flujo, índice, estructura, organización y fidelidad.
 
 ## 📄 Licencia
 

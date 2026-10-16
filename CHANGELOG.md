@@ -1,5 +1,39 @@
 # Historial de versiones
 
+## 4.0.0 — 2026-10-16
+
+Versión centrada en la calidad de los apuntes, probada con Gemini 3.8 Flash (agy) y Claude Sonnet sobre dos clases reales de materias distintas: una de programación (22 min) y una de cirugía cardíaca (1 h 42 min).
+
+### Sin exportación (cambio incompatible)
+
+- Se quitan la reagrupación final y la entrega en PDF, documento editable o `.md`: solo funcionaban bien en algunos asistentes. Los apuntes quedan en el chat, tema por tema.
+- El último tema cierra invitando a transcribir otra clase. Ahí «Finalizar» equivale a reiniciar.
+- Una pregunta tardía sobre un tema anterior se queda donde aparece, indicando a qué subtema se refiere.
+
+### Índice
+
+- Tope por tema de unos 10 minutos de clase (unas 1 500 palabras), para que cada tema se desarrolle completo en una respuesta.
+- Lo que el expositor anuncia y no llega a desarrollar no lleva tema.
+- Nombres cortos, con las palabras del expositor.
+- El intervalo de tiempo va solo en el índice, no en el título del tema desarrollado.
+
+### Fidelidad y registro
+
+- Pasar a limpio es editar la frase del expositor, no escribir una nueva: un ejemplo de antes y después, y frases de libro de texto prohibidas.
+- El conocimiento del modelo sirve para entender, no para completar.
+- Los datos no cambian de forma: ni conversiones de plazos y unidades, ni «más de» convertido en «≥».
+- Cada párrafo, viñeta o fila sale de una frase del expositor, y antes de mostrar un tema se revisan las causas añadidas («porque», «dado que», «para»…).
+- Las frases que el expositor dirige a los alumnos en segunda persona van a los apuntes.
+- Los errores del reconocimiento de voz se corrigen si la palabra correcta es inequívoca; si no, se marcan con «(¿?)».
+- Los nombres de los alumnos no se escriben: «un alumno preguntó…».
+- Sin divisores ni frases de presentación entre subtemas, y sin tablas que repitan lo dicho.
+- Los ejemplos del prompt son de materias variadas (historia, derecho, medicina) para no sesgarlo hacia una.
+
+### Pruebas
+
+- Checklist de calidad en cinco bloques: flujo, índice, estructura, organización y fidelidad.
+- Pruebas estáticas: ya no hay fases 3 y 4 ni mensajes de entrega, y el último tema remite al reinicio.
+
 ## 3.4.0 — 2026-10-15
 
 ### Fidelidad (probada con Gemini 3.8 Flash y Claude Sonnet sobre una clase real)
