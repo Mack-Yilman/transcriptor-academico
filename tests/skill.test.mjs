@@ -84,6 +84,16 @@ test('cada mensaje literal del flujo aparece idéntico en el recordatorio final'
   assert.deepEqual([...flujo].sort(), [...recordatorio].sort());
 });
 
+test('ninguna regla cita un mensaje literal recortado', () => {
+  // Una copia parcial («`> ✅ Entrega lista...`») es una segunda versión del literal y el modelo mezcla ambas.
+  const reglas = cuerpo.split('\n').filter((l) => !l.startsWith('> '));
+  for (const literal of literales(seccion('## 🔚 Recordatorio final'))) {
+    const inicio = literal.replace(/^\S+\s/, '').slice(0, 25);
+    const cita = reglas.find((l) => l.includes(inicio));
+    assert.equal(cita, undefined, `el literal «${inicio}…» aparece fuera de su línea: ${cita}`);
+  }
+});
+
 test('la tabla de la Fase 3 tiene las filas que anuncia el prompt', () => {
   const fase3 = seccion('### Fase 3', '### Fase 4');
   const filas = fase3.split('\n').filter((l) => l.startsWith('| ') && !l.startsWith('| Opción'));

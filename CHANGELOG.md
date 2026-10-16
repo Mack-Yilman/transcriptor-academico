@@ -1,5 +1,29 @@
 # Historial de versiones
 
+## 3.4.0 — 2026-10-15
+
+### Fidelidad (probada con Gemini 3.8 Flash y Claude Sonnet sobre una clase real)
+
+- Solo lo que dijo el expositor: prohibido completar con conocimiento propio definiciones, causas, ventajas, detalles técnicos o adjetivos, y lo que el docente solo nombra queda sin definir.
+- Pasar a limpio no es elevar el registro: se usa el vocabulario del expositor, sin convertir la clase en documentación técnica.
+- Los consejos, recomendaciones, avisos y comentarios prácticos del docente son contenido, aunque no parezcan académicos. El callout 🎯 incluye los consejos a los alumnos.
+- En las demostraciones se quita la narración de clics, pero se conservan los pasos, los problemas, cómo se resolvieron y lo que el docente comenta del resultado.
+- Lo que el expositor le escribe a una herramienta o a una IA durante una demostración va completo en 📌 Dictado.
+- Las tablas y las etiquetas no se rellenan con datos que el expositor no dio.
+- Cada tema se escribe recorriendo su tramo del corpus en orden, no de memoria. Si hay marcas de tiempo, el índice muestra el intervalo de cada tema y las marcas se quitan de los apuntes.
+
+### Entrega
+
+- La forma de crear el archivo depende de lo que pueda hacer el entorno: carpeta de trabajo (con nombre `apuntes-<tema>` y sin sobrescribir), conector de documentos, archivo generado como respuesta, código con descarga, o el chat.
+- Si no puede crear el formato pedido, entrega todo en el chat en la misma respuesta, sin remitir a un archivo anterior.
+- El Markdown puede entregarse como `.txt` si el entorno no crea `.md`. En PDF y documentos, una fuente que muestre emojis y símbolos, y esquemas en monoespaciada.
+- La reagrupación final solo mueve bloques tardíos sin encabezado propio, así el índice y la numeración no cambian.
+
+### Correcciones
+
+- Las reglas ya no citan mensajes literales recortados, que el modelo podía mezclar con los completos; una prueba lo vigila.
+- Se aclara que el último literal de un turno es el final cuando el turno lleva más de uno.
+
 ## 3.3.0 — 2026-10-15
 
 ### Mensajes
