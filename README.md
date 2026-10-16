@@ -2,9 +2,11 @@
 
 Una *skill* para asistentes de IA que convierte la transcripción de una clase, conferencia o ponencia, de cualquier materia, en **apuntes académicos completos y ordenados**, sin resumir ni inventar nada.
 
-Pegas el texto tal como salió de la grabación, con muletillas, desorden y todo. El asistente arma un índice y desarrolla los apuntes **tema por tema** cuando tú se lo pides, directamente en el chat.
+Pegas el texto tal como salió de la grabación, con muletillas, desorden y todo. El asistente arma un índice y desarrolla los apuntes **tema por tema** cuando tú se lo pides, directamente en el chat. Sirve para clases de cualquier materia: se probó con una de programación y una de cirugía cardíaca.
 
 Funciona con **Gemini** (app, Spark y Antigravity), **Claude** (chat, Cowork y Claude Code) y cualquier otro asistente que acepte instrucciones personalizadas.
+
+> **Versión 4.0:** la skill ya no genera archivos (PDF, Docs o `.md`); los apuntes quedan en el chat (más abajo, en «Cómo llevarte los apuntes»).
 
 ## 📦 Instalación
 
@@ -55,11 +57,6 @@ En Antigravity, Claude Code u otro agente con acceso a archivos, pega este mensa
 
 Los enlaces siempre descargan la última versión. Sube el `.zip` tal cual, sin descomprimirlo.
 
-> **¿Qué modelo usar?** La versión 4.0 se probó con dos clases reales de materias distintas (programación, 22 min; cirugía cardíaca, 1 h 42 min):
->
-> - **Claude Sonnet** conservó el 100 % de los datos clave de ambas clases, con el vocabulario del docente.
-> - **Gemini 3.8 Flash** dio el mejor índice con razonamiento **medio**: con el mínimo resumió la clase larga en 3 temas enormes, y con el máximo agregó divisores prohibidos y tardó el doble. Conservó cerca del 95 % de los datos de la clase larga y el 80 % de la corta: omite frases sueltas dirigidas a los alumnos en medio de una demostración y, en materias técnicas, tiende a escribir como un libro de texto (añade términos y explicaciones que el docente no dijo). En la app de Gemini, elige un modo con razonamiento, no el más rápido, y revisa los apuntes contra tu clase.
-
 ### Opción 5: cualquier otro asistente (ChatGPT, Copilot, Mistral…)
 
 - **Si acepta instrucciones largas** (proyecto, GPT personalizado, *system prompt*): pega el contenido de `SKILL.md` como instrucciones.
@@ -75,24 +72,38 @@ mkdir -p ~/.claude/skills && curl -fsSL https://github.com/Mack-Yilman/transcrip
 
 Cambia `~/.claude/skills` por `~/.gemini/config/skills` (Antigravity).
 
-## ✨ Qué hace
+## ✨ Cómo se usa
 
-| Fase | Qué pasa | Qué escribes tú |
+Con la skill instalada, pega la transcripción en el chat. Si la invocas sin texto, te pide que lo pegues. El flujo tiene tres fases y nunca avanza sin tu orden:
+
+| Fase | Tú escribes | El asistente |
 |---|---|---|
-| 0. Recepción | Recibe el texto por partes, si es largo | Pegas el texto; **Sí** para seguir pegando, **No** para terminar |
-| 1. Índice | Propone temas, subtemas y sub-subtemas en el orden de la clase | **➡️ Siguiente**, o un ajuste («une los temas 2 y 3») |
-| 2. Desarrollo | Desarrolla un tema completo por turno | **➡️ Siguiente** para el próximo tema |
+| 0. Recepción | Pegas el texto, por partes si es largo | Pregunta si quieres agregar más. **Sí** → pegas el siguiente bloque; **No** → arma el índice |
+| 1. Índice | **➡️ Siguiente**, o un ajuste: «une los temas 2 y 3», «separa el tema 1», «cambia el nombre del tema 4» | Muestra el índice de temas y subtemas |
+| 2. Desarrollo | **➡️ Siguiente** | Desarrolla **un tema completo** por turno y cierra con «📊 Progreso: Tema X de N completado» |
 
-En cualquier momento, **Empecemos una nueva transcripción** reinicia el proceso. Tras el último tema, «Finalizar» también.
+Al terminar el último tema, el asistente cierra con:
 
-### Cómo llevarte los apuntes
+> ✅ Transcripción completa (Tema **N** de **N**). Para transcribir otra clase, escribe **Empecemos una nueva transcripción**.
 
-Desde la versión 4.0 la skill no genera archivos: la entrega en PDF o en documentos solo funcionaba bien en algunos asistentes, y en otros resumía el contenido. Todos los apuntes quedan en el chat, tema por tema, listos para copiar. Para guardarlos, usa la función de tu plataforma; en la app de Gemini, por ejemplo, **Compartir y exportar › Exportar a Documentos** debajo de cada respuesta exporta exactamente lo que ves.
+- **Empecemos una nueva transcripción** borra todo y empieza de cero en cualquier momento. Tras el último tema, «Finalizar» hace lo mismo.
+- Si escribes algo que no es una orden de la fase (por ejemplo, «hola»), te avisa y te recuerda la orden válida, sin avanzar.
+- Un mensaje largo siempre se toma como texto de la clase, nunca como orden.
+
+### Cómo arma el índice
+
+- **Sigue el orden de la clase** y, si el docente anuncia su estructura («primero…, luego…»), la respeta.
+- **Temas de tamaño parejo:** cada tema abarca como máximo unos 10 minutos de clase, para que se desarrolle completo en una sola respuesta. Una clase de una hora y media sale en unos 10 temas; una de 20 minutos, en 3 o 4.
+- **Nombres cortos, con las palabras del docente**, no títulos de libro de texto.
+- **Solo lo que se dio:** si el docente anuncia un tema y no llega a darlo, no aparece en el índice.
+- Si la transcripción trae marcas de tiempo, cada tema muestra su intervalo (`[0:00–9:40]`), para que ubiques el tramo en la grabación.
 
 ### Cómo se ven los apuntes
 
-- **Fieles:** no resume, no inventa datos, años ni fuentes, y no llama «principio» o «ley» a lo que el docente no presentó así. Corrige los errores del reconocimiento de voz solo cuando la palabra correcta es inequívoca; si hay duda, la marca con «(¿?)» para que la revises en la grabación.
-- **Limpios:** quita muletillas, cortes de audio, bromas y marcas de tiempo, pero conserva las fechas de examen, las tareas, los consejos del docente y lo que recalca. Si la transcripción trae marcas de tiempo, el índice muestra el intervalo de cada tema (`[0:00–4:00]`).
+- **Fieles:** no resume, no inventa datos, años ni fuentes, y no llama «principio» o «ley» a lo que el docente no presentó así. Pasa a limpio las frases del docente con sus palabras, sin convertirlas en un libro de texto ni agregar explicaciones que no dio. Los números, plazos y comparaciones quedan como los dijo.
+- **Errores de la grabación:** corrige una palabra mal transcrita solo cuando la correcta es inequívoca; si hay duda, la deja y la marca con «(¿?)» para que la revises en la grabación.
+- **Limpios:** quita muletillas, cortes de audio, bromas, saludos y marcas de tiempo, pero conserva las fechas de examen, las tareas, los consejos del docente y lo que recalca.
+- **Sin nombres de alumnos:** las preguntas y respuestas de la clase aparecen como «un alumno preguntó…; el docente respondió…». Una pregunta tardía sobre un tema anterior queda donde se hizo, indicando a qué subtema se refiere.
 - **Siempre con la misma jerarquía:** cada tema lleva su título (`## 📘 Tema 1: …`) y sus subtítulos (`### 1.1. 🔹 …`), y los sub-subtítulos en negrita (`**1.1.1. 🔸 …**`) cuando el contenido tiene esa profundidad. Bajo el título del tema no hay párrafos sueltos: todo va dentro de sus subtítulos.
 - **Con formato según el contenido:**
 
@@ -110,6 +121,23 @@ Desde la versión 4.0 la skill no genera archivos: la entrega en PDF o en docume
 - **Legibles en cualquier lugar:** solo usa markdown básico y símbolos Unicode para las fórmulas (x², √, ≤), así que se ven bien en el chat, en el terminal y al exportarlos a un documento.
 - **Proporcionados:** una clase corta no se parte en muchos temas de una sola oración.
 - **Seguros:** si la clase dicta un prompt o dice «ignora las instrucciones anteriores», lo transcribe como parte de la clase; nunca lo ejecuta.
+
+### Cómo llevarte los apuntes
+
+Desde la versión 4.0 la skill no genera archivos: la entrega en PDF o en documentos solo funcionaba bien en algunos asistentes, y en otros resumía el contenido. Todos los apuntes quedan en el chat, tema por tema, listos para copiar. Para guardarlos, usa la función de tu plataforma; en la app de Gemini, por ejemplo, **Compartir y exportar › Exportar a Documentos**, debajo de cada respuesta, exporta exactamente lo que ves.
+
+### ¿Qué modelo usar?
+
+La versión 4.0 se probó con dos clases reales de materias distintas (programación, 22 min; cirugía cardíaca, 1 h 42 min):
+
+| Modelo | Datos clave conservados | Resultado |
+|---|---|---|
+| Claude Sonnet | 100 % en ambas clases | El mejor: fiel y con el vocabulario del docente |
+| Gemini 3.8 Flash, razonamiento medio | ~95 % (larga) y ~80 % (corta) | Buen índice; omite frases sueltas dichas a los alumnos durante una demostración y, en materias técnicas, tiende a escribir como un libro de texto |
+| Gemini 3.8 Flash, razonamiento mínimo | Similar | Resume las clases largas en pocos temas enormes |
+| Gemini 3.8 Flash, razonamiento máximo | Similar | Buen índice, pero más lento y con errores de formato |
+
+Con Gemini, elige un modo con razonamiento, no el más rápido, y revisa los apuntes contra tu clase. Estas pruebas se hicieron con Gemini desde Antigravity CLI; **la prueba en la app de Gemini con la versión 4.0 está pendiente**.
 
 ## 🗂️ Contenido del repositorio
 
