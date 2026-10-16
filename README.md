@@ -57,12 +57,24 @@ Los enlaces siempre descargan la última versión. Sube el `.zip` tal cual, sin 
 
 > Las skills de Gemini no usan Canvas. Si tu plataforma no puede crear el PDF o el documento, la skill te entrega el contenido en el chat para que lo copies.
 
-> **Copia 100 % fiel en la app de Gemini:** cuando pides un archivo, Gemini lo genera como una respuesta nueva, y en clases muy largas puede acortarlo. La skill le exige copiar palabra por palabra y verificar los títulos. Si aun así falta algo, elige **📋 Copiar del chat** y, debajo de la respuesta, usa **Compartir y exportar › Exportar a Documentos**. Eso exporta exactamente lo que ves; desde Documentos puedes descargarlo en PDF.
+> **Copia 100 % fiel en la app de Gemini:** cuando pides un archivo, Gemini lo genera como una respuesta nueva, y en clases muy largas puede acortarlo. La skill le exige armar un único archivo tema por tema, copiando lo que ya mostró, y verificar los títulos. Si aun así falta algo, elige **📋 Copiar del chat** y, debajo de la respuesta, usa **Compartir y exportar › Exportar a Documentos**. Eso exporta exactamente lo que ves; desde Documentos puedes descargarlo en PDF.
+
+> **Con Gemini Flash, revisa los comentarios breves del docente.** En las pruebas con una clase real de 22 minutos, Gemini 3.8 Flash no inventó datos, pero omitió algunas frases sueltas dichas en medio de una demostración (un consejo, «les dejo los enlaces en el post»). Claude Sonnet las conservó todas con la misma skill.
+
+#### Cómo entrega el archivo cada asistente
+
+| Si tu asistente… | La skill… |
+|---|---|
+| Trabaja en una carpeta (Claude Code, Cowork, Antigravity) | Guarda `apuntes-<tema>.md` (o PDF, `.docx`) en esa carpeta, sin sobrescribir otro, y te da la ruta |
+| Tiene un conector de documentos con permiso para crear (Google Docs o Drive) | Crea el documento a partir del markdown ya escrito y te da el enlace |
+| Genera archivos como una respuesta propia (app de Gemini) | Arma un solo archivo, tema por tema, con lo ya mostrado |
+| Ejecuta código y ofrece descargas (Claude.ai) | Escribe el archivo por bloques y te da la descarga |
+| No puede crear ese formato | Te avisa en una línea y te entrega todo en el chat |
 
 ### Opción 5: cualquier otro asistente (ChatGPT, Copilot, Mistral…)
 
 - **Si acepta instrucciones largas** (proyecto, GPT personalizado, *system prompt*): pega el contenido de `SKILL.md` como instrucciones.
-- **Si tiene un límite de caracteres:** el archivo ocupa unos 28 000. Súbelo como archivo de conocimiento y escribe en las instrucciones: *«Sigue al pie de la letra las instrucciones del archivo SKILL.md»*.
+- **Si tiene un límite de caracteres:** el archivo ocupa unos 33 000. Súbelo como archivo de conocimiento y escribe en las instrucciones: *«Sigue al pie de la letra las instrucciones del archivo SKILL.md»*.
 
 ### En macOS o Linux
 
@@ -89,7 +101,7 @@ En cualquier momento, **Empecemos una nueva transcripción** reinicia el proceso
 ### Cómo se ven los apuntes
 
 - **Fieles:** no resume, no inventa datos, años ni fuentes, y no llama «principio» o «ley» a lo que el docente no presentó así.
-- **Limpios:** quita muletillas, cortes de audio y bromas, pero conserva las fechas de examen, las tareas y lo que el docente recalca.
+- **Limpios:** quita muletillas, cortes de audio, bromas y marcas de tiempo, pero conserva las fechas de examen, las tareas, los consejos del docente y lo que recalca. Si la transcripción trae marcas de tiempo, el índice muestra el intervalo de cada tema (`[0:00–4:00]`).
 - **Siempre con la misma jerarquía:** cada tema lleva su título (`## 📘 Tema 1: …`) y sus subtítulos (`### 1.1. 🔹 …`), y los sub-subtítulos en negrita (`**1.1.1. 🔸 …**`) cuando el contenido tiene esa profundidad. Bajo el título del tema no hay párrafos sueltos: todo va dentro de sus subtítulos.
 - **Con formato según el contenido:**
 

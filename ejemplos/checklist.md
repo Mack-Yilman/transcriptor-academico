@@ -46,6 +46,8 @@ Los tres textos de esta carpeta son **sintéticos** (inventados para probar la s
 - [ ] Si la plataforma no puede generar el archivo completo, lo dice en una línea y entrega todo en el chat.
 - [ ] 📝 **Documento editable** crea un Google Doc si el entorno tiene Google Docs, o un `.docx` si se pidió Word o no hay Docs.
 - [ ] Tras el archivo o el enlace, la respuesta cierra con la línea ✅ **Entrega lista**, sin resumen del documento.
+- [ ] En un entorno con carpeta, el archivo se llama `apuntes-<tema>.<ext>`, queda en la carpeta de trabajo y no sobrescribe otro.
+- [ ] Si se pide un PDF y el entorno no puede crearlo, avisa en una línea y entrega todo en el chat en esa misma respuesta, aunque antes haya creado un `.md`.
 
 ## Fidelidad
 
@@ -53,7 +55,10 @@ Los tres textos de esta carpeta son **sintéticos** (inventados para probar la s
 - [ ] Las citas (Atkinson y Shiffrin 1968, Miller, Loftus, Baddeley) no tienen años ni títulos que el docente no dijo.
 - [ ] Se eliminó el ruido (audio, presentación cortada) y se conservaron los avisos (examen, capítulo seis, práctica calificada, sustentación) en un callout 🎯.
 - [ ] Nada se etiqueta como «principio», «ley» o «regla de oro» si el docente no lo dijo así.
-- [ ] Tras **📦 Finalizar**, la pregunta sobre memoria de trabajo queda junto a memoria de corto plazo en la entrega.
+- [ ] Tras **📦 Finalizar**, solo se mueven bloques tardíos sin encabezado propio. Si la pregunta sobre memoria de trabajo tiene su propio subtema, se queda en su lugar y la numeración no cambia.
+- [ ] Nada que el docente solo nombra aparece definido (p. ej., «priming»), y no hay explicaciones, causas ni adjetivos que no dijo.
+- [ ] Se conservan los consejos y los comentarios prácticos del docente, aunque sean frases sueltas en medio de una demostración.
+- [ ] El registro es el del expositor: sin jerga técnica o académica añadida («canalización», «constituye una materia prioritaria»).
 
 ## Órdenes dentro del corpus (`03-ordenes-inyectadas`)
 
